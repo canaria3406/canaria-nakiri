@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<meta charset="utf-8">
+	<meta content="webkit" name="renderer">
+	<meta content="webkit" name="force-rendering">
+	<meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta content="True" name="HandheldFriendly">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="description" content="一個讓你知道百鬼多久沒開台的奇怪網站。" />
+	<meta property="og:locale" content="zh-Hant-TW" />
+	<meta property="og:title" content="百鬼今天開台了嗎" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://nakiri.canaria.cc/" />
+	<meta property="og:image" content="https://nakiri.canaria.cc/src/NrC8FM4a_400x400.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="400" />
+	<meta property="og:image:height" content="400" />
+	<meta property="og:description" content="一個讓你知道百鬼多久沒開台的奇怪網站。" />
+	<meta property="og:site_name" content="canaria.cc">
+	<title>百鬼今天開台了嗎</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="src/logo/apple-touch-icon-next.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="src/logo/favicon-32x32-next.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="src/logo/favicon-16x16-next.png">
+	<link rel="mask-icon" href="src/logo/logo.svg" color="#f4f4f4">
+	<link rel="stylesheet" type="text/css" href="src/util.css">
+	<link rel="stylesheet" type="text/css" href="src/main.css">
+</head>
+<body>
+	<div class="bg-img1 overlay1 size1 flex-w flex-c-m p-t-55 p-b-55 p-l-15 p-r-15" style="background-image: url('src/bg01.jpg');">
+		<div class="wsize1">
+		<h3 class="l1-txt1 txt-center p-b-22">百鬼今天開台了嗎</h3>
+		<p class="txt-center m2-txt1 p-b-45"><span id="subtitlebox">API君努力收錄中</span></p>
+
+		<div id="loadingboxl">
+			<div class="flex-w flex-sa-m cd100 bor1 p-t-22 p-b-22 p-l-50 p-r-50 respon1">
+				<p class="txt-center m2-txt1"><span id="loadingbox">正在載入...</span></p>
+			</div>
+		</div>
+		
+		<div id="videoboxl">
+			<div class="flex-w flex-sa-m cd100 bor1 p-t-22 p-b-22 p-l-50 p-r-50 respon1">
+				<div class="videobox"><div id="ytplayer"></div></div>
+			</div>
+		</div>
+
+		<div id="countbox">
+			<div class="flex-w flex-sa-m cd100 bor1 p-t-42 p-b-22 p-l-50 p-r-50 respon1">
+				<div class="flex-col-c-m wsize2 m-b-20">
+					<span class="l1-txt2 p-b-4 days" id="day">35</span>
+					<span class="m2-txt2">天</span>
+				</div>
+				<span class="l1-txt2 p-b-22">:</span>
+				<div class="flex-col-c-m wsize2 m-b-20">
+					<span class="l1-txt2 p-b-4 hours" id="hour">17</span>
+					<span class="m2-txt2">時</span>
+				</div>
+				<span class="l1-txt2 p-b-22 respon2">:</span>
+				<div class="flex-col-c-m wsize2 m-b-20">
+					<span class="l1-txt2 p-b-4 minutes" id="min">56</span>
+					<span class="m2-txt2">分</span>
+				</div>
+				<span class="l1-txt2 p-b-22">:</span>
+				<div class="flex-col-c-m wsize2 m-b-20">
+					<span class="l1-txt2 p-b-4 seconds" id="sec">07</span>
+					<span class="m2-txt2">秒</span>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.24/dayjs.min.js"></script>
+<script src="https://cdn.bootcss.com/dayjs/1.8.24/plugin/utc.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+
+$(function() {
+
+	$.get('https://script.google.com/macros/s/AKfycby1HleT9aEYUxOyy8_tmmo6DCpqDzlembM4LnbP7Ny3qFU4ZhxdjK4wtKCpD2l7nBjg/exec' , function(e) {
+	
+	if (e.live == "none"){
+
+		$('#subtitlebox').text("距離百鬼上次開台，已經過了：");
+		$('#loadingboxl').hide();
+		$('#countbox').show();
+
+		dayjs.locale('zh-tw');
+		dayjs.extend(dayjs_plugin_utc);
+
+		const startDate = dayjs(e.pubt);
+		setDate();
+		setInterval(() => setDate(), 1000);
+
+		function setDate() {
+			const diff = dayjs(dayjs().diff(startDate)).utc();
+			$('#day').text(dayjs().diff(startDate, 'day'));
+			$('#hour').text(diff.format('hh'));
+			$('#min').text(diff.format('mm'));
+			$('#sec').text(diff.format('ss'));
+		}
+
+	}
+	if (e.live == "upcoming"){
+
+		$('#subtitlebox').text("百鬼就快開台了，還不快去待機：");
+		$('#loadingboxl').hide();
+		$('#videoboxl').show();
+		
+		$('<iframe>', {
+			src: e.vidi,
+			id:  'ytplayere',
+			frameborder: 0,
+			scrolling: 'no'
+		}).appendTo('#ytplayer');
+	
+	}
+	if (e.live == "live"){
+
+		$('#subtitlebox').text("百鬼正在開台，還不快去看：");
+		$('#loadingboxl').hide();
+		$('#videoboxl').show();
+		
+		$('<iframe>', {
+			src: e.vidi,
+			id:  'ytplayere',
+			frameborder: 0,
+			scrolling: 'no'
+		}).appendTo('#ytplayer');
+	
+	}
+	else {
+
+		$('#loadingbox').text("API君已經很努力了，改天再來看看吧");
+
+	}
+
+	});
+
+});
+
+</script>
+</body>
+</html>
