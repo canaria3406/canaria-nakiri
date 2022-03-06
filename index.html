@@ -80,7 +80,6 @@
 	</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.24/dayjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.24/plugin/utc.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
@@ -94,18 +93,21 @@ $(function() {
 		$('#loadingboxl').hide();
 		$('#countbox').show();
 
-		dayjs.locale('zh-tw');
-		dayjs.extend(dayjs_plugin_utc);
-
 		const startDate = dayjs(e.pubt);
 		setDate();
 		setInterval(() => setDate(), 1000);
 
 		function setDate() {
-			const diff = dayjs(dayjs().diff(startDate)).utc();
-			$('#day').text(dayjs().diff(startDate, 'day'));
-			$('#hour').text(diff.format('hh'));
-			$('#min').text(diff.format('mm'));
+			const diff = dayjs(dayjs().diff(startDate));
+			let mins = dayjs().diff(startDate, 'minute');
+			let hours = Math.floor(mins / 60);
+			let days = Math.floor(hours / 24);
+			mins = mins - (hours * 60);
+			hours = hours - (days * 24);
+
+			$('#day').text(days);
+			$('#hour').text(hours);
+			$('#min').text(mins);
 			$('#sec').text(diff.format('ss'));
 		}
 
