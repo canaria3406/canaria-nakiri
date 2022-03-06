@@ -85,7 +85,7 @@
 
 $(function() {
 
-	$.get('https://script.google.com/macros/s/AKfycby1HleT9aEYUxOyy8_tmmo6DCpqDzlembM4LnbP7Ny3qFU4ZhxdjK4wtKCpD2l7nBjg/exec' , function(e) {
+	$.get('https://script.google.com/macros/s/AKfycby48HdRaPaUCIeVX1TwUJk1PYbgAt4iOSrZpi-QeQVYPuMZz-vO_6NoaNUqf65RLgjlYQ/exec' , function(e) {
 	
 	if (e.live == "none"){
 
@@ -98,17 +98,22 @@ $(function() {
 		setInterval(() => setDate(), 1000);
 
 		function setDate() {
-			const diff = dayjs(dayjs().diff(startDate));
-			let mins = dayjs().diff(startDate, 'minute');
+			let secs = dayjs().diff(startDate, 'second');
+			let mins = Math.floor(secs / 60);
 			let hours = Math.floor(mins / 60);
 			let days = Math.floor(hours / 24);
+			secs = secs - (mins * 60)
 			mins = mins - (hours * 60);
 			hours = hours - (days * 24);
 
+			let secs2 = secs.toString().padStart(2, '0');
+			let mins2 = mins.toString().padStart(2, '0');
+			let hours2 = hours.toString().padStart(2, '0');
+
 			$('#day').text(days);
-			$('#hour').text(hours);
-			$('#min').text(mins);
-			$('#sec').text(diff.format('ss'));
+			$('#hour').text(hours2);
+			$('#min').text(mins2);
+			$('#sec').text(secs2);
 		}
 
 	}
