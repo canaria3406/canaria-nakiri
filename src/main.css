@@ -557,3 +557,12 @@ input.input100 {
 #countbox {
 	display: none;
 }
+
+#sharebox {
+    display: none;
+}
+
+#sharebox a {
+    color: #fff;
+    letter-spacing:10px;
+}
