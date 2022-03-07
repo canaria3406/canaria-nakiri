@@ -82,6 +82,7 @@
 			<p class="txt-center  p-t-20">			
 				<a href="javascript:void(0);" onclick="sharetofkinfb()"><i class="fa-brands fa-facebook"></i></a>		
 				<a href="javascript:void(0);" onclick="sharetotwitter()"><i class="fa-brands fa-twitter"></i></a>
+				<a href="javascript:void(0);" onclick="sharetoline()"><i class="fa-brands fa-line"></i></a>
 				<a href="javascript:void(0);" onclick="nakirikawaii()"><i class="fa-brands fa-youtube"></i></a>
 			</p>
 		</div>
@@ -173,6 +174,11 @@ $(function() {
 
 	function sharetofkinfb(){
 		let sresult = "https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https://nakiri.canaria.cc/&display=popup&ref=plugin&src=share_button&quote=" + gettime();
+		window.open(sresult); 
+	}
+	
+	function sharetoline() {
+		let sresult = "https://line.me/R/msg/text/?" + gettime() + '%0D%0Ahttps://nakiri.canaria.cc/';
 		window.open(sresult); 
 	}
 
