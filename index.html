@@ -27,6 +27,7 @@
 	<link rel="mask-icon" href="src/logo/logo.svg" color="#f4f4f4">
 	<link rel="stylesheet" type="text/css" href="src/util.css">
 	<link rel="stylesheet" type="text/css" href="src/main.css">
+	<link rel="stylesheet" type="text/css" href="src/font-awesome/css/all.min.css">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-J7YPKGXYF3"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -76,6 +77,15 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="sharebox">
+			<p class="txt-center  p-t-20">			
+				<a href="javascript:void(0);" onclick="sharetofkinfb()"><i class="fa-brands fa-facebook"></i></a>		
+				<a href="javascript:void(0);" onclick="sharetotwitter()"><i class="fa-brands fa-twitter"></i></a>
+				<a href="javascript:void(0);" onclick="nakirikawaii()"><i class="fa-brands fa-youtube"></i></a>
+			</p>
+		</div>
+
 		</div>
 	</div>
 
@@ -154,6 +164,31 @@ $(function() {
 	});
 
 });
+
+	function sharetotwitter() {
+		let sresult = "http://twitter.com/share?text=" + gettime() + '&url=https://nakiri.canaria.cc/';
+		window.open(sresult); 
+	}
+
+	function sharetofkinfb(){
+		let sresult = "https://www.facebook.com/sharer/sharer.php?kid_directed_site=0&sdk=joey&u=https://nakiri.canaria.cc/&display=popup&ref=plugin&src=share_button&quote=" + gettime();
+		window.open(sresult); 
+	}
+
+	function gettime(){
+
+		let sday = document.getElementById('day').innerText;
+		let shour = document.getElementById('hour').innerText;
+		let smin = document.getElementById('min').innerText;
+		let ssec = document.getElementById('sec').innerText;
+		let stime = "百鬼已經" + sday + "天" + shour + "小時" + smin + "分鐘" + ssec + "秒沒開台了";
+
+		return stime;
+	}
+
+	function nakirikawaii(){
+		alert("百鬼那麼可愛，不開台關你屁事");
+	}
 
 </script>
 </body>
