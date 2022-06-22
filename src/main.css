@@ -562,3 +562,15 @@ input.input100 {
     color: #fff;
     letter-spacing:10px;
 }
+
+#tweetboxl {
+	display: none;
+	color: #dbcccc;
+}
+
+#tweetboxl p {
+	color: #ccdbdb;
+}
+#tweetboxl a {
+	color: #dbcccc;
+}
