@@ -54,6 +54,12 @@
 			</div>
 		</div>
 
+		<div id="tweetboxl">
+			<div class="flex-w flex-sa-m cd100 bor1 p-t-22 p-b-22 p-l-50 p-r-50 respon1">
+				<div class="tweetbox"><div id="tweet"></div></div>
+			</div>
+		</div>
+
 		<div id="countbox">
 			<div class="flex-w flex-sa-m cd100 bor1 p-t-42 p-b-22 p-l-50 p-r-50 respon1">
 				<div class="flex-col-c-m wsize2 m-b-20">
@@ -154,6 +160,19 @@ $(function() {
 			scrolling: 'no'
 		}).appendTo('#ytplayer');
 	
+	}
+	if (e.live == "twet"){
+	
+		$('#subtitlebox').hide();
+		$('#loadingboxl').hide();
+		$('#tweetboxl').show();
+		
+		$("#tweet").html(e.vidi);
+		$('<script>', {
+			src: 'https://platform.twitter.com/widgets.js',
+			charset:  'utf-8',
+		}).appendTo('.twitter-tweet');
+
 	}
 	else {
 
