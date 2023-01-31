@@ -7,3 +7,7 @@
 ## How does it work?
 
 詳細的說明我放在[這裡](https://blog.canaria.cc/2022-85b456705158/ "blog")
+
+## Update
+
+2023-01-31 - 更改後端API，修正 published time 和 available time 不同導致偶爾未顯示現在直播的問題。
