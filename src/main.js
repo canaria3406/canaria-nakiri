@@ -55,9 +55,7 @@ window.addEventListener("load", function() {
             ytplayere.setAttribute("scrolling", "no");
             document.querySelector('#ytplayer').appendChild(ytplayere);;
         } else {
-            document.querySelector('#subtitlebox').style.display = 'none';
-            document.querySelector('#loadingbox').innerHTML = "API君已經很努力了，改天再來看看吧";
-            console.log('return wrong status');
+            document.querySelector('#loadingbox').innerHTML = "";
         }
     }).catch(function(error) {
         document.querySelector('#subtitlebox').style.display = 'none';
