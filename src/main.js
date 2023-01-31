@@ -4,14 +4,16 @@ window.addEventListener("load", function() {
         if (response.ok) {
             return response.json();
         } else {
-            $('#loadingbox').text("API君已經很努力了，改天再來看看吧");
+            document.querySelector('#subtitlebox').style.display = 'none';
+            document.querySelector('#loadingbox').innerHTML = "API君已經很努力了，改天再來看看吧";
+            console.log('no response');
         }
     }).then(function(data) {
         var e = data;
-        if (e.live == "none") {
-            $('#subtitlebox').text("距離百鬼上次開台，已經過了：");
-            $('#loadingboxl').hide();
-            $('#countbox').show();
+        if (e.live == "past" || e.live == "new" || e.live == "missing") {
+            document.querySelector('#subtitlebox').innerHTML = "距離百鬼上次開台，已經過了：";
+            document.querySelector('#loadingboxl').style.display = 'none';
+            document.querySelector('#countbox').style.display = 'block';
             const startDate = dayjs(e.pubt);
             setDate();
             setInterval(() => setDate(), 1000);
@@ -27,49 +29,40 @@ window.addEventListener("load", function() {
                 let secs2 = secs.toString().padStart(2, '0');
                 let mins2 = mins.toString().padStart(2, '0');
                 let hours2 = hours.toString().padStart(2, '0');
-                $('#day').text(days);
-                $('#hour').text(hours2);
-                $('#min').text(mins2);
-                $('#sec').text(secs2);
+                document.querySelector('#day').innerHTML = days;
+                document.querySelector('#hour').innerHTML = hours2;
+                document.querySelector('#min').innerHTML = mins2;
+                document.querySelector('#sec').innerHTML = secs2;
             }
         }
         if (e.live == "upcoming") {
-            $('#subtitlebox').text("百鬼就快開台了，還不快去待機：");
-            $('#loadingboxl').hide();
-            $('#videoboxl').show();
-            $('<iframe>', {
-                src: e.vidi,
-                id: 'ytplayere',
-                frameborder: 0,
-                scrolling: 'no'
-            }).appendTo('#ytplayer');
+            document.querySelector('#subtitlebox').innerHTML = "百鬼就快開台了，還不快去待機：";
+            document.querySelector('#loadingboxl').style.display = 'none';
+            document.querySelector('#videoboxl').style.display = 'block';
+            var ytplayere = document.createElement("iframe");
+            ytplayere.setAttribute("src", e.vidi);
+            ytplayere.setAttribute("sframeborder", "0");
+            ytplayere.setAttribute("scrolling", "no");
+            document.querySelector('#ytplayer').appendChild(ytplayere);;
         }
         if (e.live == "live") {
-            $('#subtitlebox').text("百鬼正在開台，還不快去看：");
-            $('#loadingboxl').hide();
-            $('#videoboxl').show();
-            $('<iframe>', {
-                src: e.vidi,
-                id: 'ytplayere',
-                frameborder: 0,
-                scrolling: 'no'
-            }).appendTo('#ytplayer');
-        }
-        if (e.live == "twet") {
-            $('#subtitlebox').hide();
-            $('#loadingboxl').hide();
-            $('#tweetboxl').show();
-            $("#tweet").html(e.pubt);
-            $('<script>', {
-                src: 'https://platform.twitter.com/widgets.js',
-                charset: 'utf-8',
-            }).appendTo('.twitter-tweet');
+            document.querySelector('#subtitlebox').innerHTML = "百鬼正在開台，還不快去看：";
+            document.querySelector('#loadingboxl').style.display = 'none';
+            document.querySelector('#videoboxl').style.display = 'block';
+            var ytplayere = document.createElement("iframe");
+            ytplayere.setAttribute("src", e.vidi);
+            ytplayere.setAttribute("sframeborder", "0");
+            ytplayere.setAttribute("scrolling", "no");
+            document.querySelector('#ytplayer').appendChild(ytplayere);;
         } else {
-            $('#loadingbox').text("API君已經很努力了，改天再來看看吧");
+            document.querySelector('#subtitlebox').style.display = 'none';
+            document.querySelector('#loadingbox').innerHTML = "API君已經很努力了，改天再來看看吧";
+            console.log('return wrong status');
         }
     }).catch(function(error) {
-        $('#loadingbox').text("API君已經很努力了，改天再來看看吧");
-        console.log('Something went wrong');
+        document.querySelector('#subtitlebox').style.display = 'none';
+        document.querySelector('#loadingbox').innerHTML = "API君已經很努力了，改天再來看看吧";
+        console.log('app script error');
     });
 });
 
