@@ -9,12 +9,11 @@ window.addEventListener("load", function() {
             console.log('no response');
         }
     }).then(function(data) {
-        var e = data;
-        if (e.live == "past" || e.live == "new" || e.live == "missing") {
+        if (data.live == "past" || data.live == "new" || data.live == "missing") {
             document.querySelector('#subtitlebox').innerHTML = "距離百鬼上次開台，已經過了：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#countbox').style.display = 'block';
-            const startDate = dayjs(e.pubt);
+            const startDate = dayjs(data.pubt);
             setDate();
             setInterval(() => setDate(), 1000);
 
@@ -35,28 +34,27 @@ window.addEventListener("load", function() {
                 document.querySelector('#sec').innerHTML = secs2;
             }
         }
-        if (e.live == "upcoming") {
+        if (data.live == "upcoming") {
             document.querySelector('#subtitlebox').innerHTML = "百鬼就快開台了，還不快去待機：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#videoboxl').style.display = 'block';
             var ytplayere = document.createElement("iframe");
-            ytplayere.setAttribute("src", e.vidi);
+            ytplayere.setAttribute("src", data.vidi);
             ytplayere.setAttribute("sframeborder", "0");
             ytplayere.setAttribute("scrolling", "no");
-            document.querySelector('#ytplayer').appendChild(ytplayere);;
+            document.querySelector('#ytplayer').appendChild(ytplayere);
         }
-        if (e.live == "live") {
+        if (data.live == "live") {
             document.querySelector('#subtitlebox').innerHTML = "百鬼正在開台，還不快去看：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#videoboxl').style.display = 'block';
             var ytplayere = document.createElement("iframe");
-            ytplayere.setAttribute("src", e.vidi);
+            ytplayere.setAttribute("src", data.vidi);
             ytplayere.setAttribute("sframeborder", "0");
             ytplayere.setAttribute("scrolling", "no");
-            document.querySelector('#ytplayer').appendChild(ytplayere);;
-        } else {
-            document.querySelector('#loadingbox').innerHTML = "";
+            document.querySelector('#ytplayer').appendChild(ytplayere);
         }
+        document.querySelector('#loadingbox').innerHTML = "";
     }).catch(function(error) {
         document.querySelector('#subtitlebox').style.display = 'none';
         document.querySelector('#loadingbox').innerHTML = "API君已經很努力了，改天再來看看吧";
