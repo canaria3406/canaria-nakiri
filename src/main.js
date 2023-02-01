@@ -1,5 +1,5 @@
 window.addEventListener("load", function() {
-    var url = 'https://script.google.com/macros/s/AKfycbydoxbJd6RJhJIe6tg8Q6IVKNHObuB8iSLyYbyoCBEQmhfP3tAxlyMtm-ozF8ptTJCd/exec';
+    var url = 'https://holodex.net/api/v2/videos?channel_id=UC7fk0CB07ly8oSl0aqKkqFg&limit=1';
     fetch(url).then(function(response) {
         if (response.ok) {
             return response.json();
@@ -9,11 +9,11 @@ window.addEventListener("load", function() {
             console.log('no response');
         }
     }).then(function(data) {
-        if (data.live == "past" || data.live == "new" || data.live == "missing") {
+        if (data[0].status == "past" || data[0].status == "new" || data[0].status == "missing") {
             document.querySelector('#subtitlebox').innerHTML = "距離百鬼上次開台，已經過了：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#countbox').style.display = 'block';
-            const startDate = dayjs(data.pubt);
+            const startDate = dayjs(data[0].available_at);
             setDate();
             setInterval(() => setDate(), 1000);
 
@@ -34,25 +34,25 @@ window.addEventListener("load", function() {
                 document.querySelector('#sec').innerHTML = secs2;
             }
         }
-        if (data.live == "upcoming") {
+        if (data[0].status == "upcoming") {
             document.querySelector('#subtitlebox').innerHTML = "百鬼就快開台了，還不快去待機：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#videoboxl').style.display = 'block';
             var ytplayere = document.createElement("iframe");
-            ytplayere.setAttribute("src", data.vidi);
+            ytplayere.setAttribute("src", 'https://www.youtube.com/embed/' + data[0].id);
             ytplayere.setAttribute("sframeborder", "0");
             ytplayere.setAttribute("scrolling", "no");
-            document.querySelector('#ytplayer').appendChild(ytplayere);
+            document.querySelector('#ytplayer').appendChild(ytplayere);;
         }
-        if (data.live == "live") {
+        if (data[0].status == "live") {
             document.querySelector('#subtitlebox').innerHTML = "百鬼正在開台，還不快去看：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#videoboxl').style.display = 'block';
             var ytplayere = document.createElement("iframe");
-            ytplayere.setAttribute("src", data.vidi);
+            ytplayere.setAttribute("src", 'https://www.youtube.com/embed/' + data[0].id);
             ytplayere.setAttribute("sframeborder", "0");
             ytplayere.setAttribute("scrolling", "no");
-            document.querySelector('#ytplayer').appendChild(ytplayere);
+            document.querySelector('#ytplayer').appendChild(ytplayere);;
         }
         document.querySelector('#loadingbox').innerHTML = "";
     }).catch(function(error) {
