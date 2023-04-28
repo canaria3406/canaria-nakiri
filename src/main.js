@@ -19,7 +19,7 @@ window.addEventListener("load", function() {
             ytplayere.setAttribute("scrolling", "no");
             document.querySelector('#ytplayer').appendChild(ytplayere);;
         }
-        if (data.live == "live") {
+        else if (data.live == "live") {
             document.querySelector('#subtitlebox').innerHTML = "百鬼正在開台，還不快去看：";
             document.querySelector('#loadingboxl').style.display = 'none';
             document.querySelector('#videoboxl').style.display = 'block';
