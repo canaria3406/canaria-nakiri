@@ -10,8 +10,6 @@
 
 ## Update
 
-2023-01-31 修正 published time 和 available time 不同導致偶爾未顯示現在直播的問題。
-
-2023-02-01 更改API，順手把jQuery給移除了。
-
+2023-01-31 修正 published time 和 available time 不同導致偶爾未顯示現在直播的問題。  
+2023-02-01 更改API，順手把jQuery給移除了。  
 2023-04-26 換回自建的API。
